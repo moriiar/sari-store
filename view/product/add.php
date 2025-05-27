@@ -1,7 +1,9 @@
 <!DOCTYPE html>
-<html>
-
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Product</title>
     <link rel="stylesheet" href="assets/bootstrap.min.css">
 </head>
 
@@ -11,13 +13,16 @@
         <h2>Add Product</h2>
         <form method="POST">
             <div class="mb-3">
-                <label>Name</label><input type="text" name="name" class="form-control" required>
+                <label for="name">Name</label>
+                <input type="text" name="name" id="name" class="form-control" required>
             </div>
             <div class="mb-3">
-                <label>Price</label><input type="number" step="0.01" name="price" class="form-control" required>
+                <label for="price">Price</label>
+                <input type="number" step="0.01" name="price" id="price" class="form-control" required>
             </div>
             <div class="mb-3">
-                <label>Quantity</label><input type="number" name="quantity" class="form-control" required>
+                <label for="quantity">Quantity</label>
+                <input type="number" name="quantity" id="quantity" class="form-control" required>
             </div>
             <button type="submit" class="btn btn-success">Save</button>
             <a href="index.php?page=product" class="btn btn-secondary">Back</a>
