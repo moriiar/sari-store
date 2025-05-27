@@ -6,8 +6,7 @@ switch ($page) {
         require 'controller/ProductController.php';
         break;
     case 'sales':
-        // Placeholder for future SalesController
-        echo "<h2>Sales Page (Coming Soon)</h2>";
+        require 'controller\SalesController.php';
         break;
     case 'home':
     default:
