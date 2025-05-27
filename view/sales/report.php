@@ -8,6 +8,7 @@
 </head>
 <body>
   <div class="container mt-4">
+    <a href="index.php?page=sales" class="btn btn-secondary mb-3">← Back to Sales Menu</a>
     <h3 class="mb-4">Monthly Sales Report</h3>
     <table class="table table-bordered table-striped">
       <thead class="table-dark">
