@@ -26,5 +26,13 @@ class Product {
         $stmt = $this->conn->prepare("CALL sp_update_product(?, ?, ?, ?)");
         $stmt->execute([$id, $name, $price, $quantity]);
     }
+
+    public function getById($id) {
+    $stmt = $this->conn->prepare("CALL sp_get_product_by_id(:id)");
+    $stmt->bindParam(':id', $id);
+    $stmt->execute();
+    return $stmt->fetch(PDO::FETCH_ASSOC);
+}
+
 }
 ?>

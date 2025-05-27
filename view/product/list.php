@@ -6,6 +6,7 @@
 </head>
 <body>
 <div class="container mt-4">
+    <a href="index.php" class="btn btn-secondary mb-3">← Back to Home</a>
     <h2>Product List</h2>
     <a href="index.php?page=product&action=add" class="btn btn-success mb-3">Add Product</a>
     <table class="table table-bordered">
