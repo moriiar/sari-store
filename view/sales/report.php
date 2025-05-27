@@ -1,15 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Monthly Sales Report</title>
   <link rel="stylesheet" href="assets/bootstrap.min.css">
 </head>
+
 <body>
   <div class="container mt-4">
     <a href="index.php?page=sales" class="btn btn-secondary mb-3">← Back to Sales Menu</a>
     <h3 class="mb-4">Monthly Sales Report</h3>
+    <a href="index.php?page=sales&action=export&month=<?= $month ?>&year=<?= $year ?>" class="btn btn-success mb-3">Export to CSV</a>
     <table class="table table-bordered table-striped">
       <thead class="table-dark">
         <tr>
@@ -22,6 +25,7 @@
       </thead>
       <tbody>
         <?php foreach ($report as $row): ?>
+          <pre><?php print_r($row); ?></pre> <!-- Temporary for debugging -->
           <tr>
             <td><?= htmlspecialchars($row['created_at']) ?></td>
             <td><?= htmlspecialchars($row['product_name']) ?></td>
@@ -34,4 +38,5 @@
     </table>
   </div>
 </body>
+
 </html>
