@@ -6,19 +6,19 @@ switch ($page) {
         require 'controller/ProductController.php';
         break;
     case 'sales':
-        require 'controller\SalesController.php';
+        require 'controller/SalesController.php';
         break;
     case 'home':
     default:
 ?>
         <!DOCTYPE html>
-        <html>
-
+        <html lang="en">
         <head>
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
             <title>Sari-Sari Store Management</title>
             <link rel="stylesheet" href="assets/bootstrap.min.css">
         </head>
-
         <body>
             <div class="container text-center mt-5">
                 <h1>SARI-SARI STORE MANAGEMENT SYSTEM</h1>
@@ -28,8 +28,8 @@ switch ($page) {
                 </div>
             </div>
         </body>
-
         </html>
 <?php
         break;
 }
+?>
