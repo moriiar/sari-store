@@ -38,17 +38,36 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $action === 'add') {
     $saleId = $sales->createSale($total);
     error_log("Sale ID created: " . $saleId);
 
-    if ($saleId > 0) {
-        foreach ($updatedItems as $item) {
-            $sales->addSaleItem($saleId, $item['product_id'], $item['qty'], $item['price'], $item['subtotal']);
+    $conn->beginTransaction();
+
+    try {
+        $saleId = $sales->createSale($total);
+
+        if ($saleId > 0) {
+            foreach ($updatedItems as $item) {
+                $sales->addSaleItem($saleId, $item['product_id'], $item['qty'], $item['price'], $item['subtotal']);
+
+                // Decrease quantity for each product
+                $success = $sales->decreaseProductQuantity($item['product_id'], $item['qty']);
+                if (!$success) {
+                    throw new Exception("Not enough stock for product ID " . $item['product_id']);
+                }
+            }
+
+            $conn->commit();
+            header("Location: ../index.php?page=sales&success=1");
+            exit;
+        } else {
+            $conn->rollBack();
+            header("Location: ../index.php?page=sales&error=1");
+            exit;
         }
-        header("Location: ../index.php?page=sales&success=1");
-        exit;
-    } else {
-        header("Location: ../index.php?page=sales&error=1");
+    } catch (Exception $e) {
+        $conn->rollBack();
+        $errorMsg = urlencode($e->getMessage());
+        header("Location: ../index.php?page=sales&error=$errorMsg");
         exit;
     }
-    exit;
 }
 
 switch ($action) {
