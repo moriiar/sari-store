@@ -7,23 +7,32 @@ $conn = $db->getConnection();
 $sales = new Sales($conn);
 $action = $_GET['action'] ?? '';
 
-switch ($action) {
-    case 'add':
-        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            $items = $_POST['items'] ?? [];
-            $total = array_reduce($items, fn($sum, $item) => $sum + ($item['qty'] * $item['price']), 0);
-            $saleId = $sales->createSale($total);
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && $action === 'add') {
+    $items = $_POST['items'] ?? [];
+    $total = array_reduce($items, fn($sum, $item) => $sum + ($item['qty'] * $item['price']), 0);
+    $saleId = $sales->createSale($total);
+    
+    error_log("Sale ID created: " . $saleId);
 
-            foreach ($items as $item) {
-                $subtotal = $item['qty'] * $item['price'];
-                $sales->addSaleItem($saleId, $item['product_id'], $item['qty'], $item['price'], $subtotal);
+    if ($saleId > 0) {
+        foreach ($items as $item) {
+            $subtotal = $item['qty'] * $item['price'];
+            $result = $sales->addSaleItem($saleId, $item['product_id'], $item['qty'], $item['price'], $subtotal);
+
+            if (!$result) {
+                error_log("Failed to add sale item for product ID: " . $item['product_id']);
+            } else {
+                error_log("Successfully added sale item for product ID: " . $item['product_id']);
             }
-            echo "Sale recorded successfully!";
-        } else {
-            include './view/sales/transactions.php';
         }
-        break;
+        echo "Sale recorded successfully!";
+    } else {
+        echo "Error creating sale.";
+    }
+    exit;
+}
 
+switch ($action) {
     case 'report':
         $month = (int) ($_GET['month'] ?? date('m'));
         $year = (int) ($_GET['year'] ?? date('Y'));
