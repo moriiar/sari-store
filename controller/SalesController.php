@@ -32,7 +32,7 @@ switch ($action) {
         break;
 
     default:
-        echo "Invalid sales action.";
+        include './view/sales/index.php';
         break;
 }
 ?>
