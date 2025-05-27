@@ -1,6 +1,6 @@
 <?php
-require_once './config/database.php';
-require_once './model/Sales.php';
+require_once __DIR__ . '/../config/database.php';
+require_once __DIR__ . '/../model/Sales.php';
 
 $db = new Database();
 $conn = $db->getConnection();
@@ -9,25 +9,44 @@ $action = $_GET['action'] ?? '';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && $action === 'add') {
     $items = $_POST['items'] ?? [];
-    $total = array_reduce($items, fn($sum, $item) => $sum + ($item['qty'] * $item['price']), 0);
+
+    $total = 0;
+    foreach ($items as $item) {
+        // Fetch the price from the products table
+        $stmt = $conn->prepare("SELECT price FROM products WHERE id = :id");
+        $stmt->bindParam(':id', $item['product_id']);
+        $stmt->execute();
+        $product = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        if (!$product) {
+            $errorMsg = urlencode("Product not found with ID " . $item['product_id']);
+            header("Location: /sari-store/index.php?page=sales&error=$errorMsg");
+            exit;
+        }
+
+        $price = (float) $product['price'];
+        $subtotal = $price * $item['qty'];
+        $total += $subtotal;
+
+        // Temporarily store for reuse below
+        $item['price'] = $price;
+        $item['subtotal'] = $subtotal;
+        $updatedItems[] = $item;
+    }
+
+    // Create sale
     $saleId = $sales->createSale($total);
-    
     error_log("Sale ID created: " . $saleId);
 
     if ($saleId > 0) {
-        foreach ($items as $item) {
-            $subtotal = $item['qty'] * $item['price'];
-            $result = $sales->addSaleItem($saleId, $item['product_id'], $item['qty'], $item['price'], $subtotal);
-
-            if (!$result) {
-                error_log("Failed to add sale item for product ID: " . $item['product_id']);
-            } else {
-                error_log("Successfully added sale item for product ID: " . $item['product_id']);
-            }
+        foreach ($updatedItems as $item) {
+            $sales->addSaleItem($saleId, $item['product_id'], $item['qty'], $item['price'], $item['subtotal']);
         }
-        echo "Sale recorded successfully!";
+        header("Location: ../index.php?page=sales&success=1");
+        exit;
     } else {
-        echo "Error creating sale.";
+        header("Location: ../index.php?page=sales&error=1");
+        exit;
     }
     exit;
 }
@@ -39,7 +58,7 @@ switch ($action) {
         $report = $sales->getMonthlyReport($month, $year);
         include './view/sales/report.php';
         break;
-        
+
     case 'export':
         $month = (int) ($_GET['month'] ?? date('m'));
         $year = (int) ($_GET['year'] ?? date('Y'));
