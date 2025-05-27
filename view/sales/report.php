@@ -25,7 +25,6 @@
       </thead>
       <tbody>
         <?php foreach ($report as $row): ?>
-          <pre><?php print_r($row); ?></pre> <!-- Temporary for debugging -->
           <tr>
             <td><?= htmlspecialchars($row['created_at']) ?></td>
             <td><?= htmlspecialchars($row['product_name']) ?></td>
