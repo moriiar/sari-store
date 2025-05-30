@@ -12,8 +12,8 @@
         <a href="index.php" class="btn btn-secondary mb-3">← Back to Home</a>
         <h2>Product List</h2>
         <a href="index.php?page=product&action=add" class="btn btn-success mb-3">Add Product</a>
-        <table class="table table-bordered" id="productTable">
-            <thead>
+        <table class="table table-bordered table-striped" id="productTable">
+            <thead class="table-dark">
                 <tr>
                     <th>ID</th>
                     <th>Name</th>
@@ -38,7 +38,7 @@
             </tbody>
         </table>
     </div>
-    
+
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.datatables.net/2.3.1/js/dataTables.min.js"></script>
     <script>
