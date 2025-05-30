@@ -5,14 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Product List</title>
     <link rel="stylesheet" href="assets/bootstrap.min.css">
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.datatables.net/2.3.1/css/dataTables.dataTables.min.css">
 </head>
 <body>
     <div class="container mt-4">
         <a href="index.php" class="btn btn-secondary mb-3">← Back to Home</a>
         <h2>Product List</h2>
         <a href="index.php?page=product&action=add" class="btn btn-success mb-3">Add Product</a>
-        <table class="table table-bordered">
+        <table class="table table-bordered" id="productTable">
             <thead>
                 <tr>
                     <th>ID</th>
@@ -38,5 +38,13 @@
             </tbody>
         </table>
     </div>
+    
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.datatables.net/2.3.1/js/dataTables.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('#productTable').DataTable();
+        });
+    </script>
 </body>
 </html>

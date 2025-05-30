@@ -5,13 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Monthly Sales Report</title>
     <link rel="stylesheet" href="assets/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/2.3.1/css/dataTables.dataTables.min.css">
 </head>
 <body>
     <div class="container mt-4">
         <a href="index.php?page=sales" class="btn btn-secondary mb-3">← Back to Sales Menu</a>
         <h3 class="mb-4">Monthly Sales Report</h3>
         <a href="index.php?page=sales&action=export&month=<?= $month ?>&year=<?= $year ?>" class="btn btn-success mb-3">Export to CSV</a>
-        <table class="table table-bordered table-striped">
+        <table class="table table-bordered table-striped" id="salesReportTable">
             <thead class="table-dark">
                 <tr>
                     <th>Date</th>
@@ -34,5 +35,13 @@
             </tbody>
         </table>
     </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.datatables.net/2.3.1/js/dataTables.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('#salesReportTable').DataTable();
+        });
+    </script>
 </body>
 </html>
