@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,11 +8,20 @@
     <link rel="stylesheet" href="assets/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdn.datatables.net/2.3.1/css/dataTables.dataTables.min.css">
 </head>
+
 <body>
     <div class="container mt-4">
-        <a href="index.php?page=sales" class="btn btn-secondary mb-3">← Back to Sales Menu</a>
-        <h3 class="mb-4">Monthly Sales Report</h3>
-        <a href="index.php?page=sales&action=export&month=<?= $month ?>&year=<?= $year ?>" class="btn btn-success mb-3">Export to CSV</a>
+        <div class="row align-items-center mb-3">
+            <div class="col-auto">
+                <a href="index.php?page=sales" class="btn btn-secondary">← Back to Sales Menu</a>
+            </div>
+            <div class="col">
+                <h3 class="mb-0 text-center">Monthly Sales Report</h3>
+            </div>
+            <div class="col-auto">
+                <a href="index.php?page=sales&action=export&month=<?= $month ?>&year=<?= $year ?>" class="btn btn-success">Export to CSV</a>
+            </div>
+        </div>
         <table class="table table-bordered table-striped" id="salesReportTable">
             <thead class="table-dark">
                 <tr>
@@ -44,4 +54,5 @@
         });
     </script>
 </body>
+
 </html>
