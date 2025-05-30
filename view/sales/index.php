@@ -10,9 +10,17 @@
 
 <body>
     <div class="container mt-4">
-        <a href="index.php" class="btn btn-secondary mb-3">← Back to Home</a>
-        <h2>Sales</h2>
-        <a href="index.php?page=sales&action=report" class="btn btn-info">View Monthly Report</a>
+        <div class="row align-items-center mb-3">
+            <div class="col-auto">
+                <a href="index.php" class="btn btn-secondary">← Back to Home</a>
+            </div>
+            <div class="col text-center">
+                <h2 class="mb-0">Sales</h2>
+            </div>
+            <div class="col-auto text-end">
+                <a href="index.php?page=sales&action=report" class="btn btn-info">View Monthly Report</a>
+            </div>
+        </div>
 
 
         <form action="controller/SalesController.php?action=add" method="POST" class="mt-4">

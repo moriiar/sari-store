@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,11 +8,20 @@
     <link rel="stylesheet" href="assets/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdn.datatables.net/2.3.1/css/dataTables.dataTables.min.css">
 </head>
+
 <body>
     <div class="container mt-4">
-        <a href="index.php" class="btn btn-secondary mb-3">← Back to Home</a>
-        <h2>Product List</h2>
-        <a href="index.php?page=product&action=add" class="btn btn-success mb-3">Add Product</a>
+        <div class="row align-items-center mb-3">
+            <div class="col-auto">
+                <a href="index.php" class="btn btn-secondary">← Back to Home</a>
+            </div>
+            <div class="col text-center">
+                <h2 class="mb-0">Product List</h2>
+            </div>
+            <div class="col-auto text-end">
+                <a href="index.php?page=product&action=add" class="btn btn-success">Add Product</a>
+            </div>
+        </div>
         <table class="table table-bordered table-striped" id="productTable">
             <thead class="table-dark">
                 <tr>
@@ -47,4 +57,5 @@
         });
     </script>
 </body>
+
 </html>

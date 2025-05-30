@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,8 +10,15 @@
 
 <body>
     <div class="container mt-4">
-        <a href="index.php?page=product" class="btn btn-secondary mb-3">← Back to Product List</a>
-        <h2>Add Product</h2>
+        <div class="row align-items-center mb-3">
+            <div class="col-auto">
+                <a href="index.php?page=product" class="btn btn-secondary">← Back to Product List</a>
+            </div>
+            <div class="col">
+                <h2 class="mb-0">Add Product</h2>
+            </div>
+        </div>
+
         <form method="POST">
             <div class="mb-3">
                 <label for="name">Name</label>
